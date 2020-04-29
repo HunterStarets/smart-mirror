@@ -187,13 +187,13 @@
             });
             
         }
-
+        
         // DISPLAY WEATHER TO UI
 
         function displayWeather(){
             iconElement.innerHTML = `<img src="icons/${weather.iconId}.png"/>`;
             tempElement.innerHTML = `${weather.temperature.value}°`;
-            descElement.innerHTML = "You need a jacket."
+            descElement.innerHTML = weather.description; 
         }
 
     </Script>

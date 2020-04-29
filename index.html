@@ -26,7 +26,7 @@
         .weather-icon img{
             position: absolute;
             left: 15%;
-            top: 0%;
+            top: -2%;
             width: 240px;
             height: 250px;
         }
@@ -182,25 +182,17 @@
             })
 
             .then(function(){
-                setTimeout(displayWeather, 1000);
+                displayWeather()
             });
             
         }
-
-
-        
-        // you need a jacket
-
-        var jacket = "You need a jacket."
-
-        
 
         // DISPLAY WEATHER TO UI
 
         function displayWeather(){
             iconElement.innerHTML = `<img src="icons/${weather.iconId}.png"/>`;
             tempElement.innerHTML = `${weather.temperature.value}°`;
-            descElement.innerHTML = jacket
+            descElement.innerHTML = "You need a jacket."
         }
 
     </Script>

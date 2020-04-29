@@ -16,7 +16,7 @@
         }
         .date{
             position: absolute; 
-            top: 20.1%;
+            top: 22%;
             right: 2.3%;
             color: #fff;
             font-size: 50px;
@@ -25,24 +25,24 @@
 
         .weather-icon img{
             position: absolute;
-            left: 15%;
+            left: 16.5%;
             top: -2%;
-            width: 240px;
-            height: 250px;
+            width: 230px;
+            height: 230px;
         }
 
         .temperature-value p{
             position: absolute;
-            left: 18%;
-            top: -17.4%;
+            left: 2%;
+            top: -14.5%;
             color: #ffffff;
-            font-size: 180px;
+            font-size: 170px;
             font-family: 'Open Sans', sans-serif;
         }
         
         .temperature-description p{
             position: absolute;
-            top: 15.6%;
+            top: 16.8%;
             left: 2.5%;
             color: #fff;
             font-size: 50px;
@@ -167,7 +167,8 @@
 
         getWeather();
         function getWeather(){
-            let api = `http://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=82005d27a116c2880c8f0fcb866998a0`;
+            let proxy = "https://cors-anywhere.herokuapp.com/";
+            let api = `${proxy}http://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=82005d27a116c2880c8f0fcb866998a0`;
     
             fetch(api)
                 .then(function(response){

@@ -66,10 +66,36 @@
     <div id="SmartMirrorDate" class="Date"></div>
     <script type="text/javascript">
       // DATE STUFF BELOW
-      // DATE STUFF BELOW
-      // DATE STUFF BELOW
-      // DATE STUFF BELOW
-      // DATE STUFF BELOW
+      var d = new Date()
+      var day = d.getDay()
+      var month = d.getMonth()
+      var date = d.getDate() + 'th'
+
+      var dayNamed = dayName(day)
+      var monthNamed = monthName(month)
+
+      // st and nd strings
+      if (d.getDay == 1) {
+        var date = d.getDate() + 'st'
+      }
+      if (d.getDay == 2) {
+        var date = d.getDate() + 'nd'
+      }
+      if (d.getDay == 3) {
+        var date = d.getDate() + 'rd'
+      }
+      if (d.getDay == 21) {
+        var date = d.getDate() + 'st'
+      }
+      if (d.getDay == 22) {
+        var date = d.getDate() + 'nd'
+      }
+      if (d.getDay == 23) {
+        var date = d.getDate() + 'rd'
+      }
+      if (d.getDay == 31) {
+        var date = d.getDate() + 'st'
+      }
 
       //aassigning Day and Month names
       function dayName (day) {
@@ -105,54 +131,17 @@
 
       //final output
       function showDate () {
-        var d = new Date()
-        var day = d.getDay()
-        var month = d.getMonth()
-        var date = d.getDate() + 'th'
-
-        var dayNamed = dayName(day)
-        var monthNamed = monthName(month)
-
-        // st and nd strings
-        if (d.getDay == 1) {
-          var date = d.getDate() + 'st'
-        }
-        if (d.getDay == 2) {
-          var date = d.getDate() + 'nd'
-        }
-        if (d.getDay == 3) {
-          var date = d.getDate() + 'rd'
-        }
-        if (d.getDay == 21) {
-          var date = d.getDate() + 'st'
-        }
-        if (d.getDay == 22) {
-          var date = d.getDate() + 'nd'
-        }
-        if (d.getDay == 23) {
-          var date = d.getDate() + 'rd'
-        }
-        if (d.getDay == 31) {
-          var date = d.getDate() + 'st'
-        }
-
         var finalString = dayNamed + ', ' + monthNamed + ' ' + date
         document.getElementById('SmartMirrorDate').innerText = finalString
         document.getElementById('SmartMirrorDate').textContent = finalString
-        setTimeout(showDate, 100000)
+
+        setTimeout(showDate, 1000)
       }
       showDate()
-      // DATE STUFF ENDS
-      // DATE STUFF ENDS
-      // DATE STUFF ENDS
-      // DATE STUFF ENDS
     </script>
 
     <div id="SmartMirrorClock" class="clock"></div>
     <script type="text/javascript">
-      //CLOCK STUFF BELOW
-      //CLOCK STUFF BELOW
-      //CLOCK STUFF BELOW
       //CLOCK STUFF BELOW
       function showTime () {
         var date = new Date()
@@ -169,10 +158,6 @@
         setTimeout(showTime, 1000)
       }
       showTime()
-      // CLOCK STUFF ENDS
-      // CLOCK STUFF ENDS
-      // CLOCK STUFF ENDS
-      // CLOCK STUFF ENDS
     </script>
 
     <div class="weather-icon">
@@ -189,10 +174,7 @@
 
     <div id="SmartMirrorWeather" class="weather"></div>
     <script type="text/javascript">
-      // THIS IS THE WEATHER APP
-      // THIS IS THE WEATHER APP
-      // THIS IS THE WEATHER APP
-      // THIS IS THE WEATHER APP
+      // WEATHER STUFF BELOW
       const iconElement = document.querySelector('.weather-icon')
       const tempElement = document.querySelector('.temperature-value p')
       const descElement = document.querySelector('.temperature-description p')
@@ -211,18 +193,15 @@
 
       getWeather()
       function getWeather () {
-        //let proxy = 'https://cors-anywhere.herokuapp.com/'
-        //let api = `${proxy}http://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=82005d27a116c2880c8f0fcb866998a0`
-        let api = `http://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=82005d27a116c2880c8f0fcb866998a0`
+        let proxy = 'https://cors-anywhere.herokuapp.com/'
+        let api = `${proxy}http://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=82005d27a116c2880c8f0fcb866998a0`
 
-        // the fetch command is grabbing the data from the API and returning it
         fetch(api)
           .then(function (response) {
             let data = response.json()
             return data
           })
-          // this is using the weather temperature value that its getting (this value is in kelvin) then using the Math.floor command to change it to farrenheit
-          // defining the variables from the API so that they can be displayed in the displayWeather function
+
           .then(function (data) {
             weather.temperature.value = Math.floor(
               ((data.main.temp - KELVIN) * 9) / 5 + 32
@@ -230,21 +209,20 @@
             weather.description = data.weather[0].description
             weather.iconId = data.weather[0].icon
           })
+
+          .then(function () {
+            setTimeout(displayWeather, 1000)
+          })
       }
+
       // DISPLAY WEATHER TO UI
 
       function displayWeather () {
         iconElement.innerHTML = `<img src="icons/${weather.iconId}.png"/>`
         tempElement.innerHTML = `${weather.temperature.value}°`
         descElement.innerHTML = weather.description
-        setTimeout(displayWeather, 100000)
       }
       displayWeather()
-      // WEATHER STUFF ENDS
-      // WEATHER STUFF ENDS
-      // WEATHER STUFF ENDS
-      // WEATHER STUFF ENDS
-      // WEATHER STUFF ENDS
     </script>
   </body>
 </html>

@@ -139,7 +139,7 @@
         var finalString = dayNamed + ', ' + monthNamed + ' ' + date
         document.getElementById('SmartMirrorDate').innerText = finalString
         document.getElementById('SmartMirrorDate').textContent = finalString
-        setTimeout(showDate, 100000)
+        setTimeout(showDate, 1000)
       }
       showDate()
       // DATE STUFF ENDS
@@ -230,6 +230,7 @@
             weather.description = data.weather[0].description
             weather.iconId = data.weather[0].icon
           })
+        setTimeout(getWeather, 100000)
       }
       // DISPLAY WEATHER TO UI
 

@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Mirror Clock</title>
+    <title>Smart Mirror</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap"
       rel="stylesheet"
@@ -17,162 +17,187 @@
       body {
         background: #000;
       }
-      .clock {
-        position: absolute;
-        top: 0%;
-        right: 2%;
-        color: #fff;
-        font-size: 190px;
-        font-family: 'Roboto', sans-serif;
-      }
-
-      .date {
-        position: absolute;
-        top: 22%;
-        right: 2.3%;
-        color: #fff;
-        font-size: 50px;
-        font-family: 'Open Sans', sans-serif;
-      }
-
-      .weather-icon img {
-        position: absolute;
-        left: 16.5%;
-        top: -2%;
-        width: 230px;
-        height: 230px;
-      }
 
       .temperature-value p {
-        position: absolute;
-        left: 2%;
-        top: -14.5%;
-        color: #ffffff;
-        font-size: 170px;
-        font-family: 'Roboto', sans-serif;
+        position: relative;
+        bottom: 541;
+        color: #fff;
+        font-size: 190px;
+        font-family: "Roboto", sans-serif;
       }
 
       .temperature-description p {
-        position: absolute;
-        top: 16.8%;
-        left: 2.5%;
+        position: relative;
+        bottom: 1020;
         color: #fff;
         font-size: 50px;
-        font-family: 'Open Sans', sans-serif;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .clock {
+        text-align: right;
+        color: #fff;
+        font-size: 190px;
+        font-family: "Roboto", sans-serif;
+      }
+
+      .date {
+        text-align: right;
+        color: #fff;
+        font-size: 50px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .workout {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 50px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .calendar {
+        color: #fff;
+        font-size: 50px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .calendar-label {
+        position: relative;
+        bottom: 640;
+        color: #fff;
+        font-size: 50px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .calendar-1 {
+        position: relative;
+        bottom: 640;
+        color: #fff;
+        font-size: 50px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .calendar-2 {
+        position: relative;
+        bottom: 640;
+        color: #fff;
+        font-size: 50px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .calendar-3 {
+        position: relative;
+        bottom: 640;
+        color: #fff;
+        font-size: 50px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .weather-icon img {
+        position: relative;
+        bottom: 165;
+        left: 250;
+      }
+      .workout-icon img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 250px;
+        height: 250px;
       }
     </style>
   </head>
+
   <body>
     <div id="SmartMirrorDate" class="Date"></div>
     <script type="text/javascript">
-      // DATE STUFF BELOW
-      // DATE STUFF BELOW
-      // DATE STUFF BELOW
-      // DATE STUFF BELOW
-      // DATE STUFF BELOW
+      // variables defined
+      var d = new Date();
+      var day = d.getDay();
+      var month = d.getMonth();
+      var date = d.getDate() + "th";
+      var dayNamed = dayName(day);
+      var monthNamed = monthName(month);
 
-      //aassigning Day and Month names
-      function dayName (day) {
-        var dayNames = [
-          'Sunday',
-          'Monday',
-          'Tuesday',
-          'Wednesday',
-          'Thursday',
-          'Friday',
-          'Saturday'
-        ]
-        return dayNames[day]
+      // st and nd strings
+      if (d.getDay == 1) {
+        var date = d.getDate() + "st";
+      } else if (d.getDay == 2) {
+        var date = d.getDate() + "nd";
+      } else if (d.getDay == 3) {
+        var date = d.getDate() + "rd";
+      } else if (d.getDay == 21) {
+        var date = d.getDate() + "st";
+      } else if (d.getDay == 22) {
+        var date = d.getDate() + "nd";
+      } else if (d.getDay == 23) {
+        var date = d.getDate() + "rd";
+      } else if (d.getDay == 31) {
+        var date = d.getDate() + "st";
+      } else {
+        var date = d.getDate() + "th";
       }
 
-      function monthName (month) {
+      //aassigning Day names
+      function dayName(day) {
+        var dayNames = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        return dayNames[day];
+      }
+      // assigning month names
+      function monthName(month) {
         var monthNames = [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December'
-        ]
-        return monthNames[month]
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        return monthNames[month];
       }
 
       //final output
-      function showDate () {
-        var d = new Date()
-        var day = d.getDay()
-        var month = d.getMonth()
-        var date = d.getDate() + 'th'
-
-        var dayNamed = dayName(day)
-        var monthNamed = monthName(month)
-
-        // st and nd strings
-        if (d.getDay == 1) {
-          var date = d.getDate() + 'st'
-        }
-        if (d.getDay == 2) {
-          var date = d.getDate() + 'nd'
-        }
-        if (d.getDay == 3) {
-          var date = d.getDate() + 'rd'
-        }
-        if (d.getDay == 21) {
-          var date = d.getDate() + 'st'
-        }
-        if (d.getDay == 22) {
-          var date = d.getDate() + 'nd'
-        }
-        if (d.getDay == 23) {
-          var date = d.getDate() + 'rd'
-        }
-        if (d.getDay == 31) {
-          var date = d.getDate() + 'st'
-        }
-
-        var finalString = dayNamed + ', ' + monthNamed + ' ' + date
-        document.getElementById('SmartMirrorDate').innerText = finalString
-        document.getElementById('SmartMirrorDate').textContent = finalString
-        setTimeout(showDate, 1000)
+      function showDate() {
+        var finalString = dayNamed + ", " + monthNamed + " " + date;
+        document.getElementById("SmartMirrorDate").innerText = finalString;
+        setTimeout(showDate, 1000);
       }
-      showDate()
-      // DATE STUFF ENDS
-      // DATE STUFF ENDS
-      // DATE STUFF ENDS
-      // DATE STUFF ENDS
+      showDate();
     </script>
 
     <div id="SmartMirrorClock" class="clock"></div>
     <script type="text/javascript">
       //CLOCK STUFF BELOW
-      //CLOCK STUFF BELOW
-      //CLOCK STUFF BELOW
-      //CLOCK STUFF BELOW
-      function showTime () {
-        var date = new Date()
-        var h = date.getHours()
-        var m = date.getMinutes()
-        m = m < 10 ? '0' + m : m
-        //m = (m < 1) ? m + "0": m;
-        h = h > 12 ? h - 12 : h
+      function showTime() {
+        var date = new Date();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        m = m < 10 ? "0" + m : m;
+        h = h > 12 ? h - 12 : h;
+        var time = h + ":" + m;
 
-        var time = h + ':' + m
-        document.getElementById('SmartMirrorClock').innerText = time
-        document.getElementById('SmartMirrorClock').textContent = time
-
-        setTimeout(showTime, 1000)
+        document.getElementById("SmartMirrorClock").innerText = time;
+        setTimeout(showTime, 1000);
       }
-      showTime()
-      // CLOCK STUFF ENDS
-      // CLOCK STUFF ENDS
-      // CLOCK STUFF ENDS
-      // CLOCK STUFF ENDS
+      showTime();
     </script>
 
     <div class="weather-icon">
@@ -189,63 +214,351 @@
 
     <div id="SmartMirrorWeather" class="weather"></div>
     <script type="text/javascript">
-      // THIS IS THE WEATHER APP
-      // THIS IS THE WEATHER APP
-      // THIS IS THE WEATHER APP
-      // THIS IS THE WEATHER APP
-      const iconElement = document.querySelector('.weather-icon')
-      const tempElement = document.querySelector('.temperature-value p')
-      const descElement = document.querySelector('.temperature-description p')
-
-      // APP DATA
-      const weather = {}
+      // WEATHER STUFF BELOW
+      var icon = document.querySelector(".weather-icon");
+      var temperature = document.querySelector(".temperature-value p");
+      var description = document.querySelector(".temperature-description p");
+      var weather = {};
+      var kelvin = 273;
+      var proxy = "https://cors-anywhere.herokuapp.com/";
+      var nameCapitalized = "-";
 
       weather.temperature = {
-        unit: 'f'
-      }
+        unit: "f",
+      };
 
-      // APP CONST
-      const KELVIN = 273
+      getWeather();
 
       // GET WEATHER INFO
-
-      function getWeather () {
-        let proxy = 'https://cors-anywhere.herokuapp.com/'
-        let api = `${proxy}http://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=82005d27a116c2880c8f0fcb866998a0`
-        //let api = `http://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=82005d27a116c2880c8f0fcb866998a0`
-
-        // the fetch command is grabbing the data from the API and returning it
+      function getWeather() {
+        var api = `${proxy}http://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=b8c52c7a7083d3e4a2a4405ab8edb56b`;
         fetch(api)
           .then(function (response) {
-            let data = response.json()
-            return data
+            var data = response.json();
+            return data;
           })
-          // this is using the weather temperature value that its getting (this value is in kelvin) then using the Math.floor command to change it to farrenheit
-          // defining the variables from the API so that they can be displayed in the displayWeather function
+
           .then(function (data) {
             weather.temperature.value = Math.floor(
-              ((data.main.temp - KELVIN) * 9) / 5 + 32
-            )
-            weather.description = data.weather[0].description
-            weather.iconId = data.weather[0].icon
+              ((data.main.temp - kelvin) * 9) / 5 + 32
+            );
+            weather.description = data.weather[0].description;
+            weather.iconId = data.weather[0].icon;
+            weather.description =
+              weather.description.charAt(0).toUpperCase() +
+              weather.description.slice(1);
           })
-        setTimeout(getWeather, 100000)
-      }
-      getWeather()
-      // DISPLAY WEATHER TO UI
+          .then(function (refresh) {
+            setTimeout(getWeather, 300000);
 
-      function displayWeather () {
-        iconElement.innerHTML = `<img src="icons/${weather.iconId}.png"/>`
-        tempElement.innerHTML = `${weather.temperature.value}°`
-        descElement.innerHTML = weather.description
-        setTimeout(displayWeather, 100000)
+            displayWeather();
+          });
       }
-      displayWeather()
-      // WEATHER STUFF ENDS
-      // WEATHER STUFF ENDS
-      // WEATHER STUFF ENDS
-      // WEATHER STUFF ENDS
-      // WEATHER STUFF ENDS
+
+      // DISPLAY WEATHER TO UI
+      function displayWeather() {
+        icon.innerHTML = `<img src="icons/${weather.iconId}.png"/>`;
+        temperature.innerHTML = `${weather.temperature.value}°`;
+        description.innerHTML = weather.description;
+        nameCapitalized =
+          weather.description.charAt(0).toUpperCase() +
+          weather.description.slice(1);
+        console.log(nameCapitalized);
+      }
+    </script>
+
+    <div id="SmartMirrorWorkout" class="workout"></div>
+    <script type="text/javascript">
+      var day = d.getDay();
+      var workoutText = "";
+      var workoutHour = d.getHours();
+      var workoutHour = 6;
+      workoutCheck();
+
+      function workoutCheck() {
+        if ((day == 1 || day == 5) && (workoutHour == 5 || workoutHour == 6)) {
+          workoutText = "Arm";
+        } else if (
+          (day == 2 || day == 4) &&
+          (workoutHour == 5 || workoutHour == 6)
+        ) {
+          workoutText = "Chest";
+        } else if (day == 3 && (workoutHour == 5 || workoutHour == 6)) {
+          workoutIcon = document.querySelector(".workout-icon");
+          workoutIcon.innerHTML = `<img src="icons/3w.png"/>`;
+        } else {
+          workout = "";
+        }
+
+        document.getElementById("SmartMirrorWorkout").textContent = workoutText;
+
+        setTimeout(workoutCheck, 1000);
+      }
+    </script>
+
+    <div id="calendar-event-label" class="calendar-label"></div>
+
+    <div id="calendar-event-1" class="calendar-1"></div>
+
+    <div id="calendar-event-2" class="calendar-2"></div>
+
+    <div id="calendar-event-3" class="calendar-3"></div>
+
+    <div id="SmartMirrorCalendar" class="calendar"></div>
+    <script type="text/javascript">
+      var calendarDate = "";
+      var calendarSummary = "";
+      var calendarEvent = "";
+      var calendarBlank = "";
+      var calendarMax = "150";
+
+      var calendarEvent1 = "";
+      var calendarEvent2 = "";
+      var calendarEvent3 = "";
+
+      var calendarStartTime = "";
+      var calendarEndTime = "";
+
+      var calendarDay = 1;
+      var calendarMonth = d.getMonth() + 1;
+      var calendarToday =
+        d.getFullYear() + "-" + calendarMonth + "-" + d.getDate();
+
+      //var calendarToday = "2020-02-24";
+
+      document.getElementById("calendar-event-label").textContent = "Today:";
+
+      getCalendar();
+      refresh();
+
+      function getCalendar() {
+        calendarApi =
+          "https://www.googleapis.com/calendar/v3/calendars/hunter.starets@gmail.com/events?key=AIzaSyAFSs0rg2JqWNDpOGFgEslMbm9hMoXLfVs";
+        fetch(calendarApi)
+          .then(function (response) {
+            var data = response.json();
+            return data;
+          })
+          .then(function (data) {
+            if (data.items[calendarDay] != undefined) {
+              //get date and summary based off API
+              calendarSummary = data.items[calendarDay].summary;
+              calendarDate = data.items[calendarDay].start.dateTime;
+              console.log("running");
+              //check to see if there is no date at all
+              calendarUndefinedCheck = data.items[calendarDay].start.date;
+
+              //Time
+              calendarStartTimeHours = data.items[calendarDay].start.dateTime;
+              calendarStartTimeMinutes = data.items[calendarDay].start.dateTime;
+              calendarEndTimeHours = data.items[calendarDay].end.dateTime;
+              calendarEndTimeMinutes = data.items[calendarDay].end.dateTime;
+
+              if (
+                calendarDate == undefined &&
+                calendarUndefinedCheck == undefined
+              ) {
+                calendarSummary = "undefined error";
+              } else if (calendarDate == undefined) {
+                calendarDate = data.items[calendarDay].start.date;
+                calendarEvent = calendarSummary + " @ All Day";
+              } else {
+                //shorten the date
+                calendarDate = calendarDate.substring(
+                  0,
+                  calendarDate.length - 15
+                );
+                //shorten the time
+                // EndTime
+                calendarEndTimeHours = calendarEndTimeHours.substring(11);
+                calendarEndTimeHours = calendarEndTimeHours.substring(
+                  0,
+                  calendarEndTimeHours.length - 12
+                );
+                calendarEndTimeMinutes = calendarEndTimeMinutes.substring(14);
+                calendarEndTimeMinutes = calendarEndTimeMinutes.substring(
+                  0,
+                  calendarEndTimeMinutes.length - 9
+                );
+
+                //Start Time
+                calendarStartTimeHours = calendarStartTimeHours.substring(11);
+                calendarStartTimeHours = calendarStartTimeHours.substring(
+                  0,
+                  calendarStartTimeHours.length - 12
+                );
+                calendarStartTimeMinutes = calendarStartTimeMinutes.substring(
+                  14
+                );
+                calendarStartTimeMinutes = calendarStartTimeMinutes.substring(
+                  0,
+                  calendarStartTimeMinutes.length - 9
+                );
+
+                //change to standard time
+                calendarStartTimeHours =
+                  calendarStartTimeHours > 12
+                    ? calendarStartTimeHours - 12
+                    : calendarStartTimeHours;
+                calendarEndTimeHours =
+                  calendarEndTimeHours > 12
+                    ? calendarEndTimeHours - 12
+                    : calendarEndTimeHours;
+
+                //simplify
+                calendarEndTime =
+                  calendarEndTimeHours + ":" + calendarEndTimeMinutes;
+                calendarStartTime =
+                  calendarStartTimeHours + ":" + calendarStartTimeMinutes;
+
+                //change work name
+
+                if (
+                  calendarSummary == "Hotschedules: FOH General Front of House"
+                ) {
+                  calendarSummary = "Chick-fil-A";
+                }
+                // final
+                calendarEvent =
+                  calendarSummary +
+                  " @ " +
+                  calendarStartTime +
+                  "-" +
+                  calendarEndTime;
+              }
+
+              //document.getElementById('SmartMirrorCalendar').textContent = calendarEvent
+
+              checkDate();
+            } else {
+              if (calendarEvent1 == calendarBlank) {
+                calendarEvent1 = "nothing";
+                document.getElementById(
+                  "calendar-event-1"
+                ).textContent = calendarEvent1;
+              } else if (calendarEvent2 == calendarBlank) {
+                calendarEvent2 = "-";
+                document.getElementById(
+                  "calendar-event-2"
+                ).textContent = calendarEvent2;
+              } else {
+                calendarEvent3 = "-";
+                document.getElementById(
+                  "calendar-event-3"
+                ).textContent = calendarEvent3;
+              }
+            }
+          })
+          .catch(function (err) {
+            document.getElementById("calendar-event-label").textContent =
+              "error: " + err;
+            calendarMax = calendarMax - 1;
+          });
+      }
+      // checkdate
+      function checkDate() {
+        if (calendarDate == calendarToday) {
+          //
+          console.log(calendarEvent + calendarDay);
+          if (calendarEvent1 == calendarBlank) {
+            calendarEvent1 = calendarEvent;
+            console.log(calendarEvent + 1);
+            document.getElementById(
+              "calendar-event-1"
+            ).textContent = calendarEvent1;
+
+            if (calendarDay == calendarMax) {
+              document.getElementById("calendar-event-2").textContent = "-";
+            } else {
+              calendarDay = calendarDay + 1;
+              getCalendar();
+            }
+          } else if (calendarEvent2 == calendarBlank) {
+            calendarEvent2 = calendarEvent;
+            console.log(calendarEvent + 2);
+            document.getElementById(
+              "calendar-event-2"
+            ).textContent = calendarEvent2;
+
+            if (calendarDay == calendarMax) {
+              document.getElementById("calendar-event-3").textContent = "-";
+            } else {
+              calendarDay = calendarDay + 1;
+              document.getElementById("calendar-event-3").textContent =
+                "checking...";
+              getCalendar();
+            }
+          } else if (calendarEvent3 == calendarBlank) {
+            calendarEvent3 = calendarEvent;
+            console.log(calendarEvent + 3);
+            document.getElementById(
+              "calendar-event-3"
+            ).textContent = calendarEvent3;
+          }
+
+          //
+        } else if (calendarDay == calendarMax) {
+          if (calendarEvent1 == calendarBlank) {
+            calendarEvent1 = "nothing";
+            document.getElementById(
+              "calendar-event-1"
+            ).textContent = calendarEvent1;
+          } else if (calendarEvent2 == calendarBlank) {
+            calendarEvent2 = "-";
+            document.getElementById(
+              "calendar-event-2"
+            ).textContent = calendarEvent2;
+          } else {
+            calendarEvent3 = "-";
+            document.getElementById(
+              "calendar-event-3"
+            ).textContent = calendarEvent3;
+          }
+        } else {
+          if (calendarEvent1 == calendarBlank) {
+            document.getElementById("calendar-event-1").textContent =
+              "checking...";
+            calendarDay = calendarDay + 1;
+            getCalendar();
+          } else {
+            calendarDay = calendarDay + 1;
+            getCalendar();
+          }
+        }
+      }
+
+      function refresh() {
+        calendarDate = "";
+        calendarSummary = "";
+        calendarEvent = "";
+        calendarBlank = "";
+        calendarMax = "150";
+
+        calendarEvent1 = "";
+        calendarEvent2 = "";
+        calendarEvent3 = "";
+
+        calendarStartTime = "";
+        calendarEndTime = "";
+
+        calendarDay = 1;
+        calendarMonth = d.getMonth() + 1;
+        calendarToday =
+          d.getFullYear() + "-" + calendarMonth + "-" + d.getDate();
+        document.getElementById(
+          "calendar-event-1"
+        ).textContent = calendarEvent1;
+        document.getElementById(
+          "calendar-event-2"
+        ).textContent = calendarEvent2;
+        document.getElementById(
+          "calendar-event-3"
+        ).textContent = calendarEvent3;
+
+        getCalendar();
+        setTimeout(refresh, 3600000);
+        console.log("refresh");
+      }
     </script>
   </body>
 </html>

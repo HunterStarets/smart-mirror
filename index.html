@@ -48,16 +48,6 @@
         font-family: "Open Sans", sans-serif;
       }
 
-      .workout {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #fff;
-        font-size: 50px;
-        font-family: "Open Sans", sans-serif;
-      }
-
       .calendar {
         color: #fff;
         font-size: 50px;
@@ -65,32 +55,32 @@
       }
 
       .calendar-label {
-        position: relative;
-        bottom: 640;
+        position: absolute;
+        bottom: 240;
         color: #fff;
         font-size: 50px;
         font-family: "Open Sans", sans-serif;
       }
 
       .calendar-1 {
-        position: relative;
-        bottom: 640;
+        position: absolute;
+        bottom: 175;
         color: #fff;
         font-size: 50px;
         font-family: "Open Sans", sans-serif;
       }
 
       .calendar-2 {
-        position: relative;
-        bottom: 640;
+        position: absolute;
+        bottom: 110;
         color: #fff;
         font-size: 50px;
         font-family: "Open Sans", sans-serif;
       }
 
       .calendar-3 {
-        position: relative;
-        bottom: 640;
+        position: absolute;
+        bottom: 45;
         color: #fff;
         font-size: 50px;
         font-family: "Open Sans", sans-serif;
@@ -231,7 +221,7 @@
 
       // GET WEATHER INFO
       function getWeather() {
-        var api = `${proxy}http://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=b8c52c7a7083d3e4a2a4405ab8edb56b`;
+        var api = `http://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=b8c52c7a7083d3e4a2a4405ab8edb56b`;
         fetch(api)
           .then(function (response) {
             var data = response.json();
@@ -249,7 +239,7 @@
               weather.description.slice(1);
           })
           .then(function (refresh) {
-            setTimeout(getWeather, 30000);
+            setTimeout(getWeather, 300000);
 
             displayWeather();
           });
@@ -264,6 +254,7 @@
           weather.description.charAt(0).toUpperCase() +
           weather.description.slice(1);
         console.log(nameCapitalized);
+        console.log(weather.temperature.value);
       }
     </script>
 
@@ -276,13 +267,17 @@
       workoutCheck();
 
       function workoutCheck() {
+        day = d.getDay();
+        workoutText = "";
+        workoutHour = d.getHours();
+        //workoutHour = 6;
         if ((day == 1 || day == 5) && (workoutHour == 5 || workoutHour == 6)) {
-          workoutText = "Arm";
+          workoutText = "";
         } else if (
           (day == 2 || day == 4) &&
           (workoutHour == 5 || workoutHour == 6)
         ) {
-          workoutText = "Chest";
+          workoutText = "";
         } else if (day == 3 && (workoutHour == 5 || workoutHour == 6)) {
           workoutIcon = document.querySelector(".workout-icon");
           workoutIcon.innerHTML = `<img src="icons/3w.png"/>`;
@@ -306,32 +301,32 @@
 
     <div id="SmartMirrorCalendar" class="calendar"></div>
     <script type="text/javascript">
-      var calendarDate = "";
-      var calendarSummary = "";
-      var calendarEvent = "";
-      var calendarBlank = "";
-      var calendarMax = "150";
+      var calendarDate;
+      var calendarSummary;
+      var calendarEvent;
 
-      var calendarEvent1 = "";
-      var calendarEvent2 = "";
-      var calendarEvent3 = "";
+      var calendarElement = "calendar-event-3";
+      var calendarDisplay = "checking calendar...";
 
-      var calendarStartTime = "";
-      var calendarEndTime = "";
+      var calendarDay = 70;
 
-      var calendarDay = 1;
-      var calendarMonth = d.getMonth() + 1;
-      var calendarToday =
-        d.getFullYear() + "-" + calendarMonth + "-" + d.getDate();
+      var calendarEvent1;
+      var calendarEvent2;
+      var calendarEvent3;
+      var calendarToday;
 
-      //var calendarToday = "2020-02-24";
+      var calendarStartTime;
+      var calendarEndTime;
 
-      document.getElementById("calendar-event-label").textContent = "Today:";
+      var calendarToday = "2020-02-24";
 
+      displayEvent();
       getCalendar();
       refresh();
 
       function getCalendar() {
+        calendarToday =
+          d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
         calendarApi =
           "https://www.googleapis.com/calendar/v3/calendars/hunter.starets@gmail.com/events?key=AIzaSyAFSs0rg2JqWNDpOGFgEslMbm9hMoXLfVs";
         fetch(calendarApi)
@@ -344,22 +339,15 @@
               //get date and summary based off API
               calendarSummary = data.items[calendarDay].summary;
               calendarDate = data.items[calendarDay].start.dateTime;
-              console.log("running");
-              //check to see if there is no date at all
-              calendarUndefinedCheck = data.items[calendarDay].start.date;
+              console.log("running...");
 
               //Time
               calendarStartTimeHours = data.items[calendarDay].start.dateTime;
-              calendarStartTimeMinutes = data.items[calendarDay].start.dateTime;
+              calendarStartTimeMinutes = calendarStartTimeHours;
               calendarEndTimeHours = data.items[calendarDay].end.dateTime;
-              calendarEndTimeMinutes = data.items[calendarDay].end.dateTime;
+              calendarEndTimeMinutes = calendarEndTimeHours;
 
-              if (
-                calendarDate == undefined &&
-                calendarUndefinedCheck == undefined
-              ) {
-                calendarSummary = "undefined error";
-              } else if (calendarDate == undefined) {
+              if (calendarDate == undefined) {
                 calendarDate = data.items[calendarDay].start.date;
                 calendarEvent = calendarSummary + " @ All Day";
               } else {
@@ -426,104 +414,55 @@
                   "-" +
                   calendarEndTime;
               }
-
-              //document.getElementById('SmartMirrorCalendar').textContent = calendarEvent
-
               checkDate();
             } else {
-              if (calendarEvent1 == calendarBlank) {
-                calendarEvent1 = "nothing";
-                document.getElementById(
-                  "calendar-event-1"
-                ).textContent = calendarEvent1;
-              } else if (calendarEvent2 == calendarBlank) {
-                calendarEvent2 = "-";
-                document.getElementById(
-                  "calendar-event-2"
-                ).textContent = calendarEvent2;
-              } else {
-                calendarEvent3 = "-";
-                document.getElementById(
-                  "calendar-event-3"
-                ).textContent = calendarEvent3;
-              }
+              finalDisplay();
             }
           })
+
           .catch(function (err) {
             document.getElementById("calendar-event-label").textContent =
               "error: " + err;
-            calendarMax = calendarMax - 1;
           });
       }
+
       // checkdate
       function checkDate() {
+        //checks to see if the events date matches todays date
         if (calendarDate == calendarToday) {
-          //
-          console.log(calendarEvent + calendarDay);
-          if (calendarEvent1 == calendarBlank) {
+          console.log(calendarEvent + "Event # " + calendarDay);
+
+          //checks to see which spot to fill with the currently grabbed event
+          //first checks to see if event slot one is empty
+          if (calendarEvent1 == "") {
             calendarEvent1 = calendarEvent;
-            console.log(calendarEvent + 1);
-            document.getElementById(
-              "calendar-event-1"
-            ).textContent = calendarEvent1;
+            console.log(calendarEvent + "=1");
 
-            if (calendarDay == calendarMax) {
-              document.getElementById("calendar-event-2").textContent = "-";
-            } else {
-              calendarDay = calendarDay + 1;
-              getCalendar();
-            }
-          } else if (calendarEvent2 == calendarBlank) {
+            calendarDay = calendarDay + 1;
+            getCalendar();
+
+            // first slot was full, so now checking if the second slot is empty
+          } else if (calendarEvent2 == "") {
             calendarEvent2 = calendarEvent;
-            console.log(calendarEvent + 2);
-            document.getElementById(
-              "calendar-event-2"
-            ).textContent = calendarEvent2;
+            console.log(calendarEvent + "=2");
 
-            if (calendarDay == calendarMax) {
-              document.getElementById("calendar-event-3").textContent = "-";
-            } else {
-              calendarDay = calendarDay + 1;
-              document.getElementById("calendar-event-3").textContent =
-                "checking...";
-              getCalendar();
-            }
-          } else if (calendarEvent3 == calendarBlank) {
+            calendarDay = calendarDay + 1;
+            getCalendar();
+
+            // the second slot was full as well, checking if the third slot is empty
+          } else if (calendarEvent3 == "") {
             calendarEvent3 = calendarEvent;
-            console.log(calendarEvent + 3);
-            document.getElementById(
-              "calendar-event-3"
-            ).textContent = calendarEvent3;
+            console.log(calendarEvent + "=3");
+            finalDisplay();
           }
 
-          //
-        } else if (calendarDay == calendarMax) {
-          if (calendarEvent1 == calendarBlank) {
-            calendarEvent1 = "nothing";
-            document.getElementById(
-              "calendar-event-1"
-            ).textContent = calendarEvent1;
-          } else if (calendarEvent2 == calendarBlank) {
-            calendarEvent2 = "-";
-            document.getElementById(
-              "calendar-event-2"
-            ).textContent = calendarEvent2;
-          } else {
-            calendarEvent3 = "-";
-            document.getElementById(
-              "calendar-event-3"
-            ).textContent = calendarEvent3;
-          }
+          // the date of the event didnt match todays date, so now its checking
+          // if it can grab the next event in the list
+
+          //adding to the day variable to check the next event in the list
         } else {
-          if (calendarEvent1 == calendarBlank) {
-            document.getElementById("calendar-event-1").textContent =
-              "checking...";
-            calendarDay = calendarDay + 1;
-            getCalendar();
-          } else {
-            calendarDay = calendarDay + 1;
-            getCalendar();
-          }
+          calendarDay = calendarDay + 1;
+          getCalendar();
         }
       }
 
@@ -531,8 +470,6 @@
         calendarDate = "";
         calendarSummary = "";
         calendarEvent = "";
-        calendarBlank = "";
-        calendarMax = "150";
 
         calendarEvent1 = "";
         calendarEvent2 = "";
@@ -541,23 +478,86 @@
         calendarStartTime = "";
         calendarEndTime = "";
 
-        calendarDay = 1;
-        calendarMonth = d.getMonth() + 1;
-        calendarToday =
-          d.getFullYear() + "-" + calendarMonth + "-" + d.getDate();
-        document.getElementById(
-          "calendar-event-1"
-        ).textContent = calendarEvent1;
-        document.getElementById(
-          "calendar-event-2"
-        ).textContent = calendarEvent2;
-        document.getElementById(
-          "calendar-event-3"
-        ).textContent = calendarEvent3;
+        calendarDay = 70;
 
         getCalendar();
-        setTimeout(refresh, 3600000);
+        setTimeout(refresh, 60000);
         console.log("refresh");
+      }
+
+      function displayEvent() {
+        document.getElementById(calendarElement).textContent = calendarDisplay;
+      }
+      function finalDisplay() {
+        if (calendarEvent3 == "") {
+          if (calendarEvent2 == "") {
+            if (calendarEvent1 == "") {
+              calendarElement = "calendar-event-label";
+              calendarDisplay = "";
+              displayEvent();
+
+              calendarElement = "calendar-event-1";
+              calendarDisplay = "";
+              displayEvent();
+
+              calendarElement = "calendar-event-2";
+              calendarDisplay = "";
+              displayEvent();
+
+              calendarElement = "calendar-event-3";
+              calendarDisplay = "nothing today";
+              displayEvent();
+            } else {
+              calendarElement = "calendar-event-label";
+              calendarDisplay = "";
+              displayEvent();
+
+              calendarElement = "calendar-event-1";
+              calendarDisplay = "";
+              displayEvent();
+
+              calendarElement = "calendar-event-2";
+              calendarDisplay = "Today:";
+              displayEvent();
+
+              calendarElement = "calendar-event-3";
+              calendarDisplay = calendarEvent1;
+              displayEvent();
+            }
+          } else {
+            calendarElement = "calendar-event-label";
+            calendarDisplay = "";
+            displayEvent();
+
+            calendarElement = "calendar-event-1";
+            calendarDisplay = "Today:";
+            displayEvent();
+
+            calendarElement = "calendar-event-2";
+            calendarDisplay = calendarEvent1;
+            displayEvent();
+
+            calendarElement = "calendar-event-3";
+            calendarDisplay = calendarEvent2;
+            displayEvent();
+          }
+        } else {
+          calendarElement = "calendar-event-label";
+          calendarDisplay = "Today:";
+          displayEvent();
+
+          calendarElement = "calendar-event-1";
+          calendarDisplay = calendarEvent1;
+          displayEvent();
+
+          calendarElement = "calendar-event-2";
+          calendarDisplay = calendarEvent2;
+          displayEvent();
+
+          calendarElement = "calendar-event-3";
+          calendarDisplay = calendarEvent3;
+          displayEvent();
+        }
       }
     </script>
   </body>

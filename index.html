@@ -222,7 +222,7 @@
 
       // GET WEATHER INFO
       function getWeather() {
-        var api = `https://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=b8c52c7a7083d3e4a2a4405ab8edb56b`;
+        var api = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=b8c52c7a7083d3e4a2a4405ab8edb56b`;
         fetch(api)
           .then(function (response) {
             var data = response.json();

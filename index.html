@@ -165,32 +165,34 @@
     <div id="SmartMirrorDate" class="Date"></div>
     <script type="text/javascript">
       // variables defined
-      var d = new Date();
-      var day = d.getDay();
-      var month = d.getMonth();
-      var date = d.getDate() + "th";
-      var dayNamed = dayName(day);
-      var monthNamed = monthName(month);
 
-      // st and nd strings
-      if (d.getDay == 1) {
-        var date = d.getDate() + "st";
-      } else if (d.getDay == 2) {
-        var date = d.getDate() + "nd";
-      } else if (d.getDay == 3) {
-        var date = d.getDate() + "rd";
-      } else if (d.getDay == 21) {
-        var date = d.getDate() + "st";
-      } else if (d.getDay == 22) {
-        var date = d.getDate() + "nd";
-      } else if (d.getDay == 23) {
-        var date = d.getDate() + "rd";
-      } else if (d.getDay == 31) {
-        var date = d.getDate() + "st";
-      } else {
-        var date = d.getDate() + "th";
+      var d = "";
+      var day = "";
+      var month = "";
+      var date = "";
+      var dayNamed = "";
+      var monthNamed = "";
+
+      function strings() {
+        // st and nd strings
+        if (d.getDay == 1) {
+          date = d.getDate() + "st";
+        } else if (d.getDay == 2) {
+          date = d.getDate() + "nd";
+        } else if (d.getDay == 3) {
+          date = d.getDate() + "rd";
+        } else if (d.getDay == 21) {
+          date = d.getDate() + "st";
+        } else if (d.getDay == 22) {
+          date = d.getDate() + "nd";
+        } else if (d.getDay == 23) {
+          date = d.getDate() + "rd";
+        } else if (d.getDay == 31) {
+          date = d.getDate() + "st";
+        } else {
+          date = d.getDate() + "th";
+        }
       }
-
       //aassigning Day names
       function dayName(day) {
         var dayNames = [
@@ -229,7 +231,21 @@
         document.getElementById("SmartMirrorDate").innerText = finalString;
         setTimeout(showDate, 1000);
       }
-      showDate();
+
+      function dateGet() {
+        d = new Date();
+        day = d.getDay();
+        month = d.getMonth();
+        date = d.getDate();
+        dayNamed = dayName(day);
+        monthNamed = monthName(month);
+        strings();
+        dayName(day);
+        monthName(month);
+        showDate();
+      }
+
+      dateGet();
     </script>
 
     <div id="SmartMirrorClock" class="clock"></div>
@@ -280,7 +296,7 @@
 
       // GET WEATHER INFO
       function getWeather() {
-        var api = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=b8c52c7a7083d3e4a2a4405ab8edb56b`;
+        var api = `https://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=b8c52c7a7083d3e4a2a4405ab8edb56b`;
         fetch(api)
           .then(function (response) {
             var data = response.json();
@@ -352,15 +368,15 @@
     </script>
 
     <div class="calendar-icon-1">
-      <img src="calendar/00c.png" alt="" />
+      <img src="icons/calendar/00c.png" alt="" />
     </div>
 
     <div class="calendar-icon-2">
-      <img src="calendar/00.png" alt="" />
+      <img src="icons/calendar/00.png" alt="" />
     </div>
 
     <div class="calendar-icon-3">
-      <img src="calendar/00.png" alt="" />
+      <img src="icons/calendar/00.png" alt="" />
     </div>
 
     <div id="calendar-event-label" class="calendar-label"></div>
@@ -650,18 +666,15 @@
         calendarDisplay = calendarTime3;
         displayEvent();
 
-        calendarIcon1.innerHTML = `<img src="calendar/${calendarIconDate1}.png"/>`;
-        calendarIcon2.innerHTML = `<img src="calendar/${calendarIconDate2}.png"/>`;
-        calendarIcon3.innerHTML = `<img src="calendar/${calendarIconDate3}.png"/>`;
+        calendarIcon1.innerHTML = `<img src="icons/calendar/${calendarIconDate1}.png"/>`;
+        calendarIcon2.innerHTML = `<img src="icons/calendar/${calendarIconDate2}.png"/>`;
+        calendarIcon3.innerHTML = `<img src="icons/calendar/${calendarIconDate3}.png"/>`;
       }
 
       //bugs that need to be fixed
 
-      //1. date: todays date now doesnt change at the start of a new day
-      //2. weather: widget stops updating after a while when using a proxy. I think its because of a request limit
-      //3. calendar:  doesnt display events in order of date
-      //4. calendar: doesnt update todays date at the start of a new day
-      //5. hasnt been tested
+      //1. weather: widget stops updating after a while when using a proxy. I think its because of a request limit
+      //2. calendar:  doesnt display events in order of date
     </script>
   </body>
 </html>

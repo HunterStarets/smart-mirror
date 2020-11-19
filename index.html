@@ -229,6 +229,7 @@
       function showDate() {
         var finalString = dayNamed + ", " + monthNamed + " " + date;
         document.getElementById("SmartMirrorDate").innerText = finalString;
+        dateGet();
         setTimeout(showDate, 1000);
       }
 

@@ -45,7 +45,56 @@
         font-size: 190px;
         font-family: "Roboto", sans-serif;
       }
+      .spotify {
+        position: absolute;
+        bottom: 110;
+        right: 20;
+        color: #fff;
+        font-size: 23px;
+        font-family: "Open Sans", sans-serif;
+      }
 
+      .spotify-s {
+        position: absolute;
+        top: 370;
+        right: 140;
+        font-weight: bold;
+        color: #fff;
+        font-size: 23px;
+        font-family: "Open Sans", sans-serif;
+      }
+      .spotify-a {
+        position: absolute;
+        top: 400;
+        right: 140;
+        color: #fff;
+        font-size: 23px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .spotify-l {
+        position: absolute;
+        top: 320;
+        right: 10;
+        color: #37dc42;
+        font-size: 25px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .spotify-art img {
+        position: absolute;
+        top: 370;
+        right: 0;
+        height: 120;
+        width: 120;
+      }
+      .spotify-logo img {
+        position: absolute;
+        top: 440;
+        right: 140;
+        height: 30;
+        width: 30;
+      }
       .date {
         text-align: right;
         color: #fff;
@@ -61,8 +110,7 @@
 
       .calendar-label {
         position: absolute;
-        bottom: 280;
-
+        top: 320;
         color: #37dc42;
         font-size: 25px;
         font-family: "Open Sans", sans-serif;
@@ -70,7 +118,7 @@
       .calendar-1 {
         position: absolute;
         font-weight: bold;
-        bottom: 230;
+        top: 370;
         left: 80;
         color: #fff;
         font-size: 25px;
@@ -79,7 +127,7 @@
       .calendar-2 {
         position: absolute;
         font-weight: bold;
-        bottom: 140;
+        top: 440;
         left: 80;
         color: #fff;
         font-size: 25px;
@@ -88,7 +136,7 @@
       .calendar-3 {
         position: absolute;
         font-weight: bold;
-        bottom: 50;
+        top: 510;
         left: 80;
         color: #fff;
         font-size: 25px;
@@ -97,7 +145,7 @@
 
       .calendar-t1 {
         position: absolute;
-        bottom: 200;
+        top: 400;
         left: 81;
         color: #fff;
         font-size: 23px;
@@ -105,7 +153,7 @@
       }
       .calendar-t2 {
         position: absolute;
-        bottom: 110;
+        top: 470;
         left: 81;
         color: #fff;
         font-size: 23px;
@@ -113,7 +161,7 @@
       }
       .calendar-t3 {
         position: absolute;
-        bottom: 20;
+        top: 540;
         left: 81;
         color: #fff;
         font-size: 23px;
@@ -122,7 +170,7 @@
 
       .calendar-icon-1 img {
         position: absolute;
-        bottom: 200;
+        top: 372;
         left: -3;
         height: 60;
         width: 60;
@@ -130,7 +178,7 @@
 
       .calendar-icon-2 img {
         position: absolute;
-        bottom: 110;
+        top: 443;
         left: -3;
         height: 60;
         width: 60;
@@ -138,7 +186,7 @@
 
       .calendar-icon-3 img {
         position: absolute;
-        bottom: 20;
+        top: 513;
         left: -3;
         height: 60;
         width: 60;
@@ -229,8 +277,6 @@
       function showDate() {
         var finalString = dayNamed + ", " + monthNamed + " " + date;
         document.getElementById("SmartMirrorDate").innerText = finalString;
-        dateGet();
-        setTimeout(showDate, 1000);
       }
 
       function dateGet() {
@@ -246,7 +292,11 @@
         showDate();
       }
 
+      function refresh() {
+        setTimeout(dateGet, 1000);
+      }
       dateGet();
+      refresh();
     </script>
 
     <div id="SmartMirrorClock" class="clock"></div>
@@ -297,7 +347,7 @@
 
       // GET WEATHER INFO
       function getWeather() {
-        var api = `https://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=b8c52c7a7083d3e4a2a4405ab8edb56b`;
+        var api = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=b8c52c7a7083d3e4a2a4405ab8edb56b`;
         fetch(api)
           .then(function (response) {
             var data = response.json();
@@ -319,6 +369,11 @@
             setTimeout(getWeather, 300000);
 
             displayWeather();
+          })
+
+          .catch(function (err) {
+            document.getElementById("calendar-event-label").textContent =
+              "error: " + err;
           });
       }
 
@@ -369,15 +424,15 @@
     </script>
 
     <div class="calendar-icon-1">
-      <img src="calendar/00c.png" alt="" />
+      <img src="icons/calendar/00c.png" alt="" />
     </div>
 
     <div class="calendar-icon-2">
-      <img src="calendar/00.png" alt="" />
+      <img src="icons/calendar/00.png" alt="" />
     </div>
 
     <div class="calendar-icon-3">
-      <img src="calendar/00.png" alt="" />
+      <img src="icons/calendar/00.png" alt="" />
     </div>
 
     <div id="calendar-event-label" class="calendar-label"></div>
@@ -667,15 +722,69 @@
         calendarDisplay = calendarTime3;
         displayEvent();
 
-        calendarIcon1.innerHTML = `<img src="calendar/${calendarIconDate1}.png"/>`;
-        calendarIcon2.innerHTML = `<img src="calendar/${calendarIconDate2}.png"/>`;
-        calendarIcon3.innerHTML = `<img src="calendar/${calendarIconDate3}.png"/>`;
+        calendarIcon1.innerHTML = `<img src="icons/calendar/${calendarIconDate1}.png"/>`;
+        calendarIcon2.innerHTML = `<img src="icons/calendar/${calendarIconDate2}.png"/>`;
+        calendarIcon3.innerHTML = `<img src="icons/calendar/${calendarIconDate3}.png"/>`;
       }
 
       //bugs that need to be fixed
 
       //1. weather: widget stops updating after a while when using a proxy. I think its because of a request limit
       //2. calendar:  doesnt display events in order of date
+    </script>
+
+    <div class="spotify-art">
+      <img src="icons/calendar/00.png" alt="" />
+    </div>
+    <div class="spotify-logo">
+      <img src="icons/spotify.png" alt="" />
+    </div>
+
+    <div id="spotify-label" class="spotify-l"></div>
+
+    <div class="spotify-l2">
+      <p>Spotify</p>
+    </div>
+
+    <div id="spotify-artist" class="spotify-a"></div>
+
+    <div id="spotify-song" class="spotify-s"></div>
+
+    <div id="SmartMirrorSpotify" class="spotify"></div>
+    <script type="text/javascript">
+      var artist = "";
+      var song = "";
+      var art = document.querySelector(".spotify-art");
+      var artLink = "";
+      document.getElementById("spotify-label").textContent = "MUSIC";
+      displaySpotify();
+      getSpotify();
+      function getSpotify() {
+        var api = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=HunterStarets&api_key=c2050bc240f54fc94b2593fbe594b9e5&format=json`;
+        fetch(api)
+          .then(function (response) {
+            var data = response.json();
+            return data;
+          })
+
+          .then(function (data) {
+            song = data.recenttracks.track[0].name;
+            artist = data.recenttracks.track[0].artist["#text"];
+            artLink = data.recenttracks.track[0].image[2]["#text"];
+
+            displaySpotify();
+          })
+          .catch(function (err) {
+            getSpotify();
+          });
+      }
+
+      function displaySpotify() {
+        document.getElementById("spotify-song").textContent = song;
+        document.getElementById("spotify-artist").textContent = artist;
+        art.innerHTML = `<img src="${artLink}"/>`;
+        setTimeout(getSpotify, 1000);
+      }
     </script>
   </body>
 </html>

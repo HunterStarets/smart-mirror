@@ -1,0 +1,286 @@
+<html>
+  <head>
+    <title>Smart Mirror</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap"
+      rel="stylesheet"
+    />
+
+    <style type="text/css">
+      body {
+        background: #000;
+      }
+
+      .weather-icons img {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .temperature-value p {
+        position: absolute;
+        color: #fff;
+        font-size: 190px;
+        font-family: "Roboto", sans-serif;
+      }
+
+      .temperature-description p {
+        position: absolute;
+        top: 0;
+        color: #fff;
+        font-size: 50px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      /* below is the spotify extension */
+      .spotify {
+        position: absolute;
+        bottom: 110;
+        right: 20;
+        color: #fff;
+        font-size: 23px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .spotify-s {
+        position: absolute;
+        top: 370;
+        right: 140;
+        font-weight: bold;
+        color: #fff;
+        font-size: 25px;
+        font-family: "Open Sans", sans-serif;
+      }
+      .spotify-a {
+        position: absolute;
+        top: 400;
+        right: 140;
+        color: #fff;
+        font-size: 23px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .spotify-art img {
+        position: absolute;
+        top: 370;
+        right: 0;
+        height: 120;
+        width: 120;
+        border-radius: 10px;
+      }
+
+      .spotify-logo img {
+        position: absolute;
+        top: 440;
+        right: 140;
+        height: 30;
+        width: 30;
+      }
+      /* above is the spotify section */
+
+      /* below is the date and time */
+
+      .date {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #fff;
+        font-size: 50px;
+        font-family: "Open Sans", sans-serif;
+      }
+      .clock {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #fff;
+        font-size: 190px;
+        font-family: "Roboto", sans-serif;
+      }
+
+      /* above is the date and time */
+
+      /* below the google calendar */
+      .calendar {
+        position: absolute;
+        color: #fff;
+        font-size: 50px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .calendar-label {
+        position: absolute;
+        top: 520;
+        color: #37dc42;
+        font-size: 25px;
+        font-family: "Open Sans", sans-serif;
+      }
+      .calendar-1 {
+        position: absolute;
+        font-weight: bold;
+        top: 570;
+        left: 80;
+        color: #fff;
+        font-size: 25px;
+        font-family: "Open Sans", sans-serif;
+      }
+      .calendar-2 {
+        position: absolute;
+        font-weight: bold;
+        top: 640;
+        left: 80;
+        color: #fff;
+        font-size: 25px;
+        font-family: "Open Sans", sans-serif;
+      }
+      .calendar-3 {
+        position: absolute;
+        font-weight: bold;
+        top: 710;
+        left: 80;
+        color: #fff;
+        font-size: 25px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .calendar-t1 {
+        position: absolute;
+        top: 600;
+        left: 81;
+        color: #fff;
+        font-size: 23px;
+        font-family: "Open Sans", sans-serif;
+      }
+      .calendar-t2 {
+        position: absolute;
+        top: 670;
+        left: 81;
+        color: #fff;
+        font-size: 23px;
+        font-family: "Open Sans", sans-serif;
+      }
+      .calendar-t3 {
+        position: absolute;
+        top: 740;
+        left: 81;
+        color: #fff;
+        font-size: 23px;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .calendar-icon-1 img {
+        position: absolute;
+        top: 572;
+        left: -3;
+        height: 60;
+        width: 60;
+      }
+
+      .calendar-icon-2 img {
+        position: absolute;
+        top: 643;
+        left: -3;
+        height: 60;
+        width: 60;
+      }
+
+      .calendar-icon-3 img {
+        position: absolute;
+        top: 713;
+        left: -3;
+        height: 60;
+        width: 60;
+      }
+      /* above is everything google calendar*/
+
+      /* everything below is hourly weather 
+
+      .hourlyweather-set {
+        top: 100;
+        left: 20;
+        color: #fff;
+        font-family: "Open Sans", sans-serif;
+      }
+      */
+    </style>
+  </head>
+
+  <body>
+    <div id="SmartMirrorDate" class="Date"></div>
+    <script src="date.js"></script>
+
+    <div id="SmartMirrorClock" class="clock"></div>
+    <script src="clock.js"></script>
+
+    <div class="weather-icon">
+      <img src="icons/unknown.png" alt="" />
+    </div>
+
+    <div class="temperature-value">
+      <p>- °</p>
+    </div>
+
+    <div class="temperature-description">
+      <p>-</p>
+    </div>
+
+    <div id="SmartMirrorWeather" class="weather"></div>
+    <script src="weather.js"></script>
+
+    <div class="calendar-icon-1">
+      <img src="icons/calendar/00c.png" alt="" />
+    </div>
+
+    <div class="calendar-icon-2">
+      <img src="icons/calendar/00.png" alt="" />
+    </div>
+
+    <div class="calendar-icon-3">
+      <img src="icons/calendar/00.png" alt="" />
+    </div>
+
+    <div id="calendar-event-label" class="calendar-label"></div>
+
+    <div id="calendar-event-1" class="calendar-1"></div>
+
+    <div id="calendar-event-2" class="calendar-2"></div>
+
+    <div id="calendar-event-3" class="calendar-3"></div>
+
+    <div id="calendar-time-1" class="calendar-t1"></div>
+
+    <div id="calendar-time-2" class="calendar-t2"></div>
+
+    <div id="calendar-time-3" class="calendar-t3"></div>
+
+    <div id="SmartMirrorCalendar" class="calendar"></div>
+    <script src="calendar.js"></script>
+
+    <div class="spotify-art">
+      <img src="icons/calendar/00.png" alt="" />
+    </div>
+    
+    <div class="spotify-logo">
+      <img src="icons/spotify.png" alt="" />
+    </div>
+
+    
+    <div id="spotify-artist" class="spotify-a"></div>
+
+    <div id="spotify-song" class="spotify-s"></div>
+
+    <div id="SmartMirrorSpotify" class="spotify"></div>
+    <script src="spotify.js"></script>
+
+    <div id="SmartMirrorHourlyWeather" class="hourly"></div>
+    <script src="hourlyweather.js"></script>
+
+    </div>
+  </body>
+</html>

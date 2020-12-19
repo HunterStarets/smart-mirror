@@ -40,9 +40,13 @@
         right: 0;
         font-size: 50px;
       }
+      /*
 
-      /* below is the weather
-      */
+
+
+
+
+*/
       .temperature {
         position: absolute;
         top: 0;
@@ -66,11 +70,16 @@
         top: 71;
         left: 310;
       }
+      /*
 
-      /* below is spotify */
+
+
+
+
+*/
       .spotify {
         position: absolute;
-        top: 400;
+        top: 260;
         right: 0;
         white-space: nowrap;
         font-size: 23px;
@@ -99,10 +108,17 @@
         height: 120;
         width: 120;
       }
+      /*
+
+
+
+
+
+*/
 
       .calendar {
         position: absolute;
-        top: 400;
+        top: 465;
         left: 0;
         white-space: nowrap;
         font-size: 23px;
@@ -153,6 +169,82 @@
         height: 60;
         width: 60;
       }
+      /*
+
+
+
+
+*/
+      .forecast {
+        position: absolute;
+        top: 260;
+        left: 0;
+        white-space: nowrap;
+      }
+
+      .forecast .forecast1 #forecast-hour1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-weight: bold;
+        font-size: 32;
+      }
+      .forecast .forecast2 #forecast-hour2 {
+        position: absolute;
+        top: 60;
+        left: 0;
+        font-size: 30;
+      }
+      .forecast .forecast3 #forecast-hour3 {
+        position: absolute;
+        top: 120;
+        left: 0;
+        font-size: 28;
+        opacity: 0.9;
+      }
+      .forecast .forecast1 #forecast-value1 {
+        position: absolute;
+        top: 0;
+        right: -507;
+        font-size: 32;
+        font-weight: bold;
+      }
+      .forecast .forecast2 #forecast-value2 {
+        position: absolute;
+        top: 60;
+        right: -507;
+        font-size: 30;
+      }
+      .forecast .forecast3 #forecast-value3 {
+        position: absolute;
+        top: 120;
+        right: -507;
+        font-size: 28;
+        opacity: 0.9;
+      }
+      .forecast .forecast1 #forecast-icon1 {
+        position: absolute;
+        top: -10;
+        left: 225;
+        height: 65;
+        width: 65;
+      }
+      .forecast .forecast2 #forecast-icon2 {
+        position: absolute;
+        top: 50;
+        left: 227;
+        height: 60;
+        width: 60;
+        opacity: 0.9;
+      }
+      .forecast .forecast3 #forecast-icon3 {
+        position: absolute;
+        top: 110;
+        left: 230;
+        height: 55;
+        width: 55;
+        opacity: 0.8;
+      }
       /* below is google calendar */
     </style>
   </head>
@@ -174,7 +266,6 @@
       <div id="spotify-artist"></div>
       <img id="spotify-icon" src="icons/calendar/00.png" />
       <img id="spotify-art" src="icons/calendar/00.png" />
-      <div id="opaque"></div>
     </div>
 
     <div class="calendar">
@@ -187,6 +278,24 @@
       <img id="calendar-icon-1" src="icons/calendar/00c.png" />
       <img id="calendar-icon-2" src="icons/calendar/00.png" />
       <img id="calendar-icon-3" src="icons/calendar/00.png" />
+    </div>
+
+    <div class="forecast">
+      <div class="forecast1">
+        <div id="forecast-hour1"></div>
+        <img id="forecast-icon1" src="icons/04d.png" />
+        <div id="forecast-value1"></div>
+      </div>
+      <div class="forecast2">
+        <div id="forecast-hour2"></div>
+        <div id="forecast-value2"></div>
+        <img id="forecast-icon2" src="icons/04d.png" />
+      </div>
+      <div class="forecast3">
+        <div id="forecast-hour3"></div>
+        <div id="forecast-value3"></div>
+        <img id="forecast-icon3" src="icons/04d.png" />
+      </div>
     </div>
 
     <script src="clock.js"></script>

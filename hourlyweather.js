@@ -13,12 +13,13 @@ function refreshWeather() {
   times = [];
   descriptions = [];
   icons = [];
-  setTimeout(getHourly, 1800000);
+  setTimeout(getHourly, 600000);
 }
 
 function getHourly() {
   var api =
-    "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=1&combinationMethod=aggregate&contentType=json&unitGroup=us&locationMode=single&key=CXFG6FLI4DMWUJHTRDVICTU72&dataElements=default&locations=Winston-Salem%2C%20NC%2C%20US";
+    "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=1&combinationMethod=aggregate&contentType=json&unitGroup=us&locationMode=single&key=UWYTTLXZPPJ5RGR5CYBZCHFWA&dataElements=default&locations=winston-salem";
+  //var api = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=1&combinationMethod=aggregate&contentType=json&unitGroup=us&locationMode=single&key=CXFG6FLI4DMWUJHTRDVICTU72&dataElements=default&locations=Winston-Salem%2C%20NC%2C%20US";
   fetch(api)
     .then(function (response) {
       var data = response.json();
@@ -27,7 +28,7 @@ function getHourly() {
     .then(function (data) {
       fillTemp();
       function fillTemp() {
-        for (var i = 0; i < 2; i++) {
+        for (var i = 0; i < 15; i = i + 2) {
           //temp array
           temp = data.location.values[i].temp;
           temp = Math.round(temp);
@@ -36,7 +37,7 @@ function getHourly() {
           //time array
           time = data.location.values[i].datetimeStr;
           time = time.substring(11, time.length - 12);
-          time = time > 12 ? time - 12 : time;
+          time = time > 12 ? time - 12 + " pm" : time + " am";
           times.push(time + "");
 
           //description array
@@ -59,16 +60,22 @@ function getHourly() {
       }
     })
     .catch(function (err) {
-      console.log("error: " + err);
+      console.log("weather: " + err);
     });
 
   function displayWeather() {
+    //current hour
     document.getElementById("temperature-value").textContent = temps[0];
     document.getElementById("temperature-description").textContent =
       descriptions[0];
     // document.getElementById("temperature-icon").src =
     // "icons/" + icons[0] + ".png";
-    console.log(temps);
+    for (var i = 1; i < 4; i++) {
+      document.getElementById("forecast-value" + i).textContent = temps[i];
+      document.getElementById("forecast-hour" + i).textContent = times[i];
+      console.log(temps[i]);
+    }
+
     refreshWeather();
   }
 }

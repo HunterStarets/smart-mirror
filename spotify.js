@@ -6,7 +6,7 @@ let icon;
 
 getSpotify();
 function getSpotify() {
-  let api = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=HunterStarets&api_key=c2050bc240f54fc94b2593fbe594b9e5&format=json`;
+  let api; //removed api key for security reasons
   fetch(api)
     .then(function (response) {
       let data = response.json();

@@ -41,8 +41,7 @@ getCalendar();
 refresh();
 
 function getCalendar() {
-  calendarApi =
-    "https://www.googleapis.com/calendar/v3/calendars/hunter.starets@gmail.com/events?key=AIzaSyAFSs0rg2JqWNDpOGFgEslMbm9hMoXLfVs";
+  calendarApi; //removed api key for security reasons
   fetch(calendarApi)
     .then(function (response) {
       var data = response.json();

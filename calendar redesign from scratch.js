@@ -8,8 +8,7 @@ function getCalendar() {
   tomorrow =
     d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + (d.getDate() + 1);
 
-  api =
-    "https://www.googleapis.com/calendar/v3/calendars/hunter.starets@gmail.com/events?key=AIzaSyAFSs0rg2JqWNDpOGFgEslMbm9hMoXLfVs";
+  api; //removed api key for security reasons
   fetch(api)
     .then(function (response) {
       var data = response.json();

@@ -17,8 +17,7 @@ function refreshWeather() {
 }
 
 function getHourly() {
-  var api =
-    "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=1&combinationMethod=aggregate&contentType=json&unitGroup=us&locationMode=single&key=UWYTTLXZPPJ5RGR5CYBZCHFWA&dataElements=default&locations=winston-salem";
+  var api; //removed api key for security reasons
   //var api = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=1&combinationMethod=aggregate&contentType=json&unitGroup=us&locationMode=single&key=CXFG6FLI4DMWUJHTRDVICTU72&dataElements=default&locations=Winston-Salem%2C%20NC%2C%20US";
   fetch(api)
     .then(function (response) {

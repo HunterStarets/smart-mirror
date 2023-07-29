@@ -11,7 +11,7 @@ getWeather();
 
 // GET WEATHER INFO
 function getWeather() {
-  var api = `https://api.openweathermap.org/data/2.5/weather?lat=36.146729&lon=-80.323853&appid=b8c52c7a7083d3e4a2a4405ab8edb56b`;
+  var api; //removed api key for security reasons
   fetch(api)
     .then(function (response) {
       var data = response.json();
@@ -41,11 +41,9 @@ function getWeather() {
 function displayWeather() {
   document.getElementById("temperature-icon").src = icon;
 
-  document.getElementById(
-    "temperature-value"
-  ).textContent = weatherTemperatureValue;
+  document.getElementById("temperature-value").textContent =
+    weatherTemperatureValue;
 
-  document.getElementById(
-    "temperature-description"
-  ).textContent = weatherDescription;
+  document.getElementById("temperature-description").textContent =
+    weatherDescription;
 }

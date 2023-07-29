@@ -10,7 +10,7 @@ The application provides the following features:
 
 1. **Weather Information**: Displays current weather conditions using OpenWeatherMap's API.
 2. **Calendar Events**: Integrates with Google Calendar's API to show upcoming events.
-3. **Currently Listening to on Spotify**: Shows the currently playing track on Spotify, fetched from the Last.fm AP.I
+3. **Currently Listening to on Spotify**: Shows the currently playing track on Spotify, fetched from the Last.fm API
 4. **Date and Time**: Displays the current date and time.
 
 ![smartmirror](https://github.com/HunterStarets/smartmirror/assets/17518254/e3ba0cc4-9784-4800-90d4-5dff1a3b241a)

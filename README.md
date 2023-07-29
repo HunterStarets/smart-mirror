@@ -13,6 +13,9 @@ The application provides the following features:
 3. **Currently Listening to on Spotify**: Shows the currently playing track on Spotify, fetched from the Last.fm AP.I
 4. **Date and Time**: Displays the current date and time.
 
+![smartmirror](https://github.com/HunterStarets/smartmirror/assets/17518254/e3ba0cc4-9784-4800-90d4-5dff1a3b241a)
+
+
 ## Disclaimer
 
 Please note that this project was my very first attempt at programming. As such, the code is not up to current industry standards, and there are many areas where it could be optimized or improved. However, I believe it's essential to preserve this project as a testament to my growth and learning in the field of software development. Therefore, I do not have any plans to make updates to it in the foreseeable future.
